@@ -1,3 +1,4 @@
+from opsdroid.skill import Skill
 from opsdroid.matchers import match_regex
 import logging
 import dns.resolver
@@ -5,8 +6,9 @@ import dns.resolver
 def setup(opsdroid):
     logging.debug("Loaded yourextip module")
 
-@match_regex(r'what is your (public|external|internet) ip', case_sensitive=False)
-async def hello(opsdroid, config, message):
+class YourextipSkill(Skill):
+  @match_regex(r'what is your (public|external|internet) ip', case_sensitive=False)
+  async def yourextip(self, message):
     resolver_domain_for_query_external_ip = config.get("resolver_for_externa_ip","resolver1.opendns.com")
     domain_name_to_query_for_external_ip = config.get("domain_name_for_external_ip","myip.opendns.com")
     resolver=dns.resolver.Resolver()
