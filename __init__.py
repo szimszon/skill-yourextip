@@ -3,9 +3,6 @@ from opsdroid.matchers import match_regex
 import logging
 import dns.resolver
 
-def setup(opsdroid):
-    logging.debug("Loaded yourextip module")
-
 class YourextipSkill(Skill):
   @match_regex(r'what is your (public|external|internet) ip', case_sensitive=False)
   async def yourextip(self, message):
